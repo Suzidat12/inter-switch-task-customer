@@ -1,12 +1,18 @@
 spring:
   application:
     name: customer-service
+
+  # Optional: Import configuration from a Config Server
   config:
     import: "optional:configserver:http://localhost:8088"
+
+  # MySQL datasource configuration
   datasource:
-    url: jdbc:mysql://localhost:3306/customer_account
+    url: jdbc:mysql://localhost:3306/customer_account?createDatabaseIfNotExist=true
     username: root
     password: Password@1
+
+  # Hibernate JPA configuration
   jpa:
     hibernate:
       ddl-auto: update

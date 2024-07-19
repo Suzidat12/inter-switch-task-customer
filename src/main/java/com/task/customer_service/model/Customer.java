@@ -2,16 +2,15 @@ package com.task.customer_service.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
+
+
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Indexed;
 
-import java.io.Serializable;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Indexed
@@ -26,8 +25,7 @@ import java.util.Set;
         name = "customer_sequence_gen",
         sequenceName = "customer_seq",
         allocationSize = 1)
-public class Customer   {
-
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_sequence_gen")
     private Long id;
@@ -44,40 +42,39 @@ public class Customer   {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "dob")
+    private String dob;
 
-    @Column(name = "mobile_number",  unique = true)
+    @Column(name = "mobile_number", unique = true)
     private String mobileNumber;
-
+    @JsonIgnore
     @Column(name = "bvn", unique = true)
     private String bvn;
-
+    @JsonIgnore
     @Column(name = "nin", unique = true)
     private String nin;
 
     @Column(name = "bvn_validated")
     private boolean bvnValidated;
 
-    @Basic
+
     @Column(name = "gender")
     private String gender;
 
-    @Basic
-    @Column(name = "balance_before" )
+
+    @Column(name = "balance_before")
     private BigDecimal balanceBefore;
 
-
-    @Basic
-    @Column(name = "balance_after" )
+    @Column(name = "balance_after")
     private BigDecimal balanceAfter;
 
 
-    @Basic
     @Column(name = "withdraw_amount")
     private BigDecimal withdrawAmount;
 
-    @Basic
-    @Column(name = "account_number" , unique = true)
-    private double accountNumber;
+
+    @Column(name = "account_number", unique = true)
+    private String accountNumber;
 
     @JsonIgnore
     @Column(name = "transaction_count")
@@ -97,6 +94,7 @@ public class Customer   {
 
     @Column(name = "transaction_date")
     private Date transactionDate;
+
     public void incrementTransactionCount() {
         transactionCount++;
     }

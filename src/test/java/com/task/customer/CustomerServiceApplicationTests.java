@@ -1,4 +1,4 @@
-package com.task.customer_service;
+package com.task.customer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

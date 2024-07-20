@@ -1,18 +1,12 @@
-package com.task.customer_service.utils;
+package com.task.customer.utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.task.customer_service.dto.response.BvnVerificationResponse;
+import com.task.customer.dto.response.BvnVerificationResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 
-import java.util.Objects;
 import java.util.Random;
 
 @Service

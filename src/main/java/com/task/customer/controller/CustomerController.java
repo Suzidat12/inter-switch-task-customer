@@ -1,10 +1,13 @@
-package com.task.customer_service.controller;
+package com.task.customer.controller;
 
-import com.task.customer_service.dto.request.CustomerRequest;
-import com.task.customer_service.service.CustomerService;
+import com.task.customer.dto.request.CustomerRequest;
+import com.task.customer.entity.Customer;
+import com.task.customer.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
@@ -14,6 +17,11 @@ public class CustomerController {
     @PostMapping("/register")
     public ResponseEntity<String> registerAccount(@RequestBody CustomerRequest request){
         return customerService.register(request);
+    }
+
+    @GetMapping("/dashboard")
+    public List<Customer> getCustomerInfo(){
+        return customerService.getDashBoard();
     }
 
 }

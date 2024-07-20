@@ -29,6 +29,12 @@ public class CustomerRepository {
         return foundCustomer.orElseThrow(() -> new RuntimeException("Customer with Email " + email + " already exist"));
     }
 
+    public Optional<Customer> findByMail(String email) {
+        return customers.stream()
+                .filter(customer -> customer.getEmail().equals(email))
+                .findFirst();
+    }
+
     public List<Customer> findAll() {
         return customers;
     }

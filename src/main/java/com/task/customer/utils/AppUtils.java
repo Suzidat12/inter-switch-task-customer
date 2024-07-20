@@ -12,10 +12,7 @@ import java.util.Random;
 @Service
 @Slf4j
 public class AppUtils {
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
 
     public String generateAccountNumber(){
         Random random = new Random();

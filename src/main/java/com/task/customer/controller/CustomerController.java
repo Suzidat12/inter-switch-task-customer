@@ -1,6 +1,8 @@
 package com.task.customer.controller;
 
 import com.task.customer.dto.request.CustomerRequest;
+import com.task.customer.dto.request.LoginRequest;
+import com.task.customer.dto.response.JwtAuthenticationResponse;
 import com.task.customer.entity.Customer;
 import com.task.customer.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +22,13 @@ public class CustomerController {
     }
 
     @GetMapping("/dashboard")
-    public List<Customer> getCustomerInfo(){
-        return customerService.getDashBoard();
+    public ResponseEntity<List<Customer>>getCustomerInfo(){
+        return  ResponseEntity.ok(customerService.getDashBoard());
     }
+
+@PostMapping("/login")
+    public ResponseEntity<JwtAuthenticationResponse> login(@RequestBody LoginRequest request){
+        return ResponseEntity.ok(customerService.login(request));
+}
 
 }

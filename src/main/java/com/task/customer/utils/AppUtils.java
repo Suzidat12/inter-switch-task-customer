@@ -1,28 +1,57 @@
 package com.task.customer.utils;
 
 import com.task.customer.dto.response.BvnVerificationResponse;
+import com.task.customer.entity.Customer;
+import com.task.customer.repository.CustomerRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
+import java.util.UUID;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AppUtils {
-
+private final CustomerRepository customerRepository;
 
     public String generateAccountNumber(){
         Random random = new Random();
         int digit = 1000000000 + random.nextInt(900000000);
         return String.valueOf(digit);
     }
+    public boolean isCustomer(Customer user) {
+        return (user instanceof Customer);
+    }
+    public Customer getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+
+            // Example: if using custom UserDetails implementation
+            if (principal instanceof Customer) {
+                return (Customer) principal;
+            }
+            return customerRepository.findByMail(authentication.getName()).orElse(null);
+            // Implement your own logic to fetch user details based on authentication.getName()
+            // Example: return userRepository.findByEmailOrMobileNumber(authentication.getName()).orElse(null);
+        }
+
+        return null;
+    }
+
+    public String generateUUID() {
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
+    }
 
     public BvnVerificationResponse verifyBvn1(String bvn) {
         // Your existing implementation to verify the BVN
-        String BVN_VERIFICATION_URL = "https://api.credodemo.com/core/bvn/validate/{bvn}";
+        String BVN_VERIFICATION_URL = "########################################";
 
 //        // Replace {bvn} with the actual BVN number to be verified
 //        String url = BVN_VERIFICATION_URL.replace("{bvn}", bvn);

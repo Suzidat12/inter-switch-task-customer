@@ -1,6 +1,7 @@
 package com.task.customer.repository;
 
 import com.task.customer.entity.Customer;
+import com.task.customer.entity.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -34,7 +35,13 @@ public class CustomerRepository {
                 .filter(customer -> customer.getEmail().equals(email))
                 .findFirst();
     }
-
+    public Customer findByIds(String id) {
+        return customers.stream()
+                .filter(customer ->
+                        customer.getId().equals(id))
+                .findFirst()
+                .orElseThrow(()->new RuntimeException("Customer not found"));
+    }
     public List<Customer> findAll() {
         return customers;
     }

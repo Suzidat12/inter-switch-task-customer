@@ -1,7 +1,7 @@
 package com.task.customer.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,15 +17,18 @@ import java.util.List;
 @Setter
 public class Customer implements UserDetails {
 
-    private Long id;
+    private String id;
     private String profilePicUrl;
     private String fullName;
     private String email;
+    private String userId;
     private String password;
     private String dob;
     private String role;
     private String mobileNumber;
+    @JsonIgnore
     private String bvn;
+    @JsonIgnore
     private String nin;
     private boolean bvnValidated;
     private String gender;
@@ -51,6 +54,7 @@ public class Customer implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         return List.of(new SimpleGrantedAuthority("USER"));
     }
 
@@ -78,4 +82,6 @@ public class Customer implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

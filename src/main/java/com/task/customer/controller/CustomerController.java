@@ -21,10 +21,6 @@ public class CustomerController {
         return customerService.register(request);
     }
 
-    @GetMapping("/dashboard")
-    public ResponseEntity<List<Customer>>getCustomerInfo(){
-        return  ResponseEntity.ok(customerService.getDashBoard());
-    }
 
 @PostMapping("/login")
     public ResponseEntity<JwtAuthenticationResponse> login(@RequestBody LoginRequest request){

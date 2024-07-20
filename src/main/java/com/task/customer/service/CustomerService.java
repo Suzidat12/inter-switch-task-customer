@@ -51,6 +51,7 @@ public class CustomerService {
 //            return ResponseEntity.badRequest().body("Bvn not found");
 //        }
                 Customer customer = new Customer();
+                customer.setId(appUtils.generateUUID());
                 customer.setBvn(request.getBvn());
                 customer.setEmail(request.getEmail());
                 //  customer.setGender(bvnVerification.getGender());
@@ -69,14 +70,11 @@ public class CustomerService {
                 customer.setDateCreated(new Date());
                 customer.setAccountNumber(appUtils.generateAccountNumber());
                 customerRepository.addCustomer(customer);
-                return ResponseEntity.ok("Sucess");
+                return ResponseEntity.ok("Customer registered successfully");
             }
         }
     }
 
-  public List<Customer> getDashBoard(){
-       return customerRepository.findAll();
-    }
 
     public JwtAuthenticationResponse login(LoginRequest request){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
